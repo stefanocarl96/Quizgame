@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>MovieApiController.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MovieApiController.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">tech.bts.Controller</span><span class="s0">;</span>
+
+
+import <span class="s1">org.springframework.beans.factory.annotation.Autowired</span><span class="s0">;</span>
+
+import <span class="s1">tech.bts.Service.MovieService</span><span class="s0">;</span>
+
+import <span class="s1">java.util.List</span><span class="s0">;</span>
+
+<span class="s1">@RestController</span>
+@RequestMapping(path = <span class="s2">&quot;/api/movies&quot;</span><span class="s1">)</span>
+<span class="s0">public class </span><span class="s1">MovieApiController {</span>
+
+    <span class="s0">private </span><span class="s1">Movie Movie</span><span class="s0">;</span>
+
+    <span class="s1">@Autowired</span>
+    <span class="s0">public </span><span class="s1">MovieApiController(MovieService movieService) {</span>
+        <span class="s0">this</span><span class="s1">.movieService = movieService</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    @RequestMapping(method = RequestMethod.GET)
+    <span class="s0">public </span><span class="s1">List&lt;Movie&gt; getMovies(){</span>
+        <span class="s0">return </span><span class="s1">movieService.getAllMovies()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    @RequestMapping(method = RequestMethod.POST)
+    <span class="s0">public void </span><span class="s1">addMovie(@RequestBody Movie movie) {</span>
+        <span class="s0">this</span><span class="s1">.movieService.addMovie(movie)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    @RequestMapping(method = RequestMethod.GET<span class="s0">, </span><span class="s1">path = </span><span class="s2">&quot;/{movieTitle}&quot;</span><span class="s1">)</span>
+    <span class="s0">public </span><span class="s1">Movie getMovie(@PathVariable String movieTitle) {</span>
+        <span class="s0">return this</span><span class="s1">.movieService.getMovieByTitle(movieTitle)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+}
+</pre>
+</body>
+</html>
